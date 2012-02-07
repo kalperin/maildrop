@@ -137,6 +137,17 @@
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	[self showButtonBar:self];
 	[self showLionInfo];
+	
+//	[[NSDistributedNotificationCenter
+//	  
+//	  
+//	  defaultCenter] addObserver:self selector:@selector(logNotification:) name:nil object:nil];
+	
+}
+
+-(void)logNotification:(NSNotification *)notification
+{
+	NSLog(@"name: %@\nobject: %@\nuser info: %@", [notification name], [notification object], [notification userInfo]);
 }
 
 - (IBAction)logout:(id)sender {

@@ -97,6 +97,8 @@
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)create:(id)sender;
+- (IBAction)createOpportunity:(id)sender; 
+
 - (IBAction)searchWho:(id)sender;
 - (IBAction)searchWhat:(id)sender;
 - (IBAction)showCreateContact:(id)sender;

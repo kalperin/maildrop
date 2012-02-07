@@ -159,6 +159,46 @@
 	return [NSString stringWithFormat:@"From: %@\r\nTo: %@\r\n\r\n%@", [e fromAddr], [e toAddr], [e body]];
 }
 
+- (IBAction)createOpportunity:(id)sender 
+{
+	SObjectPermsWrapper *opportunity = [SObjectPermsWrapper withDescribe:[sforce describeSObject:@"Opportunity"] forUpdate:NO];
+	NSDate *date = [email date];
+	NSCalendarDate *duedate = [date dateWithCalendarFormat:nil timeZone:nil];
+	[opportunity setFieldDateValue:duedate field:@"CloseDate"];
+	[opportunity setFieldValue:[self whatSearchText] field:@"Name"];
+	[opportunity setFieldValue:@"S1: Researching/Qualifying" field:@"StageName"];
+	
+	ZKSObject *who = [self selectedWho];
+
+	[opportunity setFieldValue:[who fieldValue:@"AccountId"] field:@"AccountId"];
+	
+	ZKSaveResult *sr = [[sforce create:[NSArray arrayWithObject:[opportunity sobject]]] objectAtIndex:0];
+	if ([sr success]) {
+		//connect the opportunity with the contact
+		SObjectPermsWrapper *opportunityContactRole = [SObjectPermsWrapper withDescribe:[sforce describeSObject:@"OpportunityContactRole"] forUpdate:NO];
+		[opportunityContactRole setFieldValue:[sr id] field:@"OpportunityId"];
+		[opportunityContactRole setFieldValue:[who id] field:@"ContactId"];
+		[opportunityContactRole setFieldValue:@"Recruiter" field:@"Role"];
+		
+		ZKSaveResult *opportunityContactRoleSaveResult = [[sforce create:[NSArray arrayWithObject:[opportunityContactRole sobject]]] objectAtIndex:0];
+		if (![opportunityContactRoleSaveResult success]) {
+			NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity contact role" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[sr message]];
+			[a runModal];
+			
+		}
+		
+//		taskId = [[sr id] copy];
+//		[pendingTaskWhoWhat setTaskId:[sr id]];
+//		[NSApp stopModal];
+	} else { 
+		NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[sr message]];
+		[a runModal];
+	}
+
+
+
+
+}
 - (IBAction)create:(id)sender {
 	SObjectPermsWrapper *task = [SObjectPermsWrapper withDescribe:[sforce describeSObject:@"Task"] forUpdate:NO];
 	[task setFieldValue:[NSString stringWithFormat:@"Email: %@", [email subject]] field:@"Subject"];
@@ -237,7 +277,7 @@
 -(NSString *)whoFieldsForType:(NSString *)type {
 	static NSString *WHO_FIELDS = @"Id, Email, Name, FirstName, LastName";
 	static NSString *WHO_FIELDS_LEAD = @"Company";
-	static NSString *WHO_FIELDS_CONTACT = @"Account.Name";
+	static NSString *WHO_FIELDS_CONTACT = @"Account.Name, AccountID ";
 
 	if ([type isEqualToString:LEAD])
 		return [NSString stringWithFormat:@"%@,%@", WHO_FIELDS, WHO_FIELDS_LEAD];
@@ -257,8 +297,26 @@
 	@try {
 		NSArray *res = [sforce search:sosl];
 		[self setWhoSearchResults:res];
-		if ([res count] == 1)
+		if ([res count] == 1) {
 			[whoSearchController setSelectionIndex:0];
+			ZKSObject *object = [res objectAtIndex:0];
+			ZKQueryResult *qr = [sforce query:[NSString stringWithFormat:@"select id, name from opportunity where accountId='%@'", [object fieldValue:@"AccountId"]]];
+			
+			if ([[qr records] count] > 0) {
+				[self setWhatSearchResultsData:[qr records]];
+				[whatSearchResults selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];				
+			}
+
+//			sosl = [NSMutableString stringWithFormat:@"FIND {*} IN ALL FIELDS RETURNING Opportunity (id where AccountId = '%@') ", [object fieldValue:@"AccountId"]];			
+//			NSArray *opportunityResults = [sforce search:sosl];
+//			[self setWhatSearchResultsData:opportunityResults];
+//			if ([opportunityResults count] == 1) {
+//				[whatSearchResults selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+//			}
+
+
+		}
+			
 	}
 	@catch (ZKSoapException *ex) {
 		NSAlert * a = [NSAlert alertWithMessageText:@"Search Failed" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[ex reason]];
@@ -267,7 +325,12 @@
 }
 
 - (NSString *)buildWhatSosl {
-	NSMutableString *sosl = [NSMutableString stringWithFormat:@"FIND {%@*} IN ALL FIELDS RETURNING", [self escapeSosl:[self whatSearchText]]];
+	NSMutableString *sosl = nil;
+//	if ([[self whatSearchText] length] == 0) {
+//		sosl = [NSMutableString stringWithFormat:@"FIND {%@} IN ALL FIELDS RETURNING", [self escapeSosl:[self whoSearchText]]];
+//	} else {
+		sosl = [NSMutableString stringWithFormat:@"FIND {%@*} IN ALL FIELDS RETURNING", [self escapeSosl:[self whatSearchText]]];
+//	}
 	NSMutableDictionary *sobject;
 	BOOL first = YES;
 	NSEnumerator *e = [[self whatObjectTypes] objectEnumerator];
@@ -570,8 +633,22 @@
 - (NSString *)createActivity:(Email *)theEmail sforce:(ZKSforceClient *)sf {
 	[self resetState];
 	[self setSforce:sf];
+
+	NSString *subject = [[theEmail subject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSString *subjectPrefix = [@"re:" lowercaseString];
+	while ([subject length] > [subjectPrefix length] && [[subject lowercaseString] rangeOfString:subjectPrefix].location == 0) {
+		subject = [[subject substringFromIndex:[subjectPrefix length]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	[theEmail setSubject:subject];
+
 	[self setEmail:theEmail];
 	[self setWhoSearchText:[email addrOfInterest]];
+//	[self setWhatSearchText:[email addrOfInterest]];
+//
+//	[self searchWhat:nil];
+	
+	[self setWhatSearchText:[email subject]];
+
 	[self setClosedTaskStatus:[self defaultTaskStatus]];
 	self.storeTaskStatusDefault = NO;
 	[NSApp activateIgnoringOtherApps:YES];
