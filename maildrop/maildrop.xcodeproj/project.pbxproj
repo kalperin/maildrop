@@ -11,6 +11,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		A934AE4714E2D8EF00CD43C3 /* menubar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A934AE4514E2D8EF00CD43C3 /* menubar.xib */; };
+		A934AE4A14E2DAE500CD43C3 /* salesforce32.png in Resources */ = {isa = PBXBuildFile; fileRef = A934AE4914E2DAE500CD43C3 /* salesforce32.png */; };
 		F41532EC0B4227FE00E36D7B /* CreateActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41532EB0B4227FE00E36D7B /* CreateActivityController.m */; };
 		F41B85570B3CFB5200971C0B /* Email.m in Sources */ = {isa = PBXBuildFile; fileRef = F41B85560B3CFB5200971C0B /* Email.m */; };
 		F41B85600B3CFE6400971C0B /* maildrop.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F41B855F0B3CFE6400971C0B /* maildrop.sdef */; };
@@ -107,6 +109,8 @@
 		32CA4F630368D1EE00C91783 /* maildrop_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = maildrop_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Maildrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maildrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A934AE4614E2D8EF00CD43C3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/menubar.xib; sourceTree = "<group>"; };
+		A934AE4914E2DAE500CD43C3 /* salesforce32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = salesforce32.png; sourceTree = "<group>"; };
 		F41532EA0B4227FE00E36D7B /* CreateActivityController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CreateActivityController.h; sourceTree = "<group>"; };
 		F41532EB0B4227FE00E36D7B /* CreateActivityController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CreateActivityController.m; sourceTree = "<group>"; };
 		F41B85550B3CFB5200971C0B /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Email.h; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				F46C83C30EC683BE00944C77 /* mail_icon.png */,
 				F46C838B0EC64E3C00944C77 /* cases32.png */,
 				F46C838C0EC64E3C00944C77 /* mail32.png */,
+				A934AE4914E2DAE500CD43C3 /* salesforce32.png */,
 				F4E83C3A0B8EAE5E00217FDB /* Login.nib */,
 				F4E83C3B0B8EAE5E00217FDB /* minus-8.png */,
 				F4E83C3C0B8EAE5E00217FDB /* plus-8.png */,
@@ -342,6 +347,7 @@
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 				F4DBCB380B3E259400D94639 /* Credits.html */,
 				F47E35B0145910420017AD47 /* Localizable.strings */,
+				A934AE4514E2D8EF00CD43C3 /* menubar.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* maildrop */;
 			projectDirPath = "";
@@ -550,6 +557,8 @@
 				F49592801292448F00DDD2A7 /* outlook scripts in Resources */,
 				F45F31E212939A3700BDCF61 /* outlook_icon.png in Resources */,
 				F47E35B1145910420017AD47 /* Localizable.strings in Resources */,
+				A934AE4714E2D8EF00CD43C3 /* menubar.xib in Resources */,
+				A934AE4A14E2DAE500CD43C3 /* salesforce32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +639,14 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		A934AE4514E2D8EF00CD43C3 /* menubar.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A934AE4614E2D8EF00CD43C3 /* English */,
+			);
+			name = menubar.xib;
 			sourceTree = "<group>";
 		};
 		F47E35B0145910420017AD47 /* Localizable.strings */ = {

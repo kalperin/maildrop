@@ -37,12 +37,16 @@
 	
 	BOOL						isFrontMostApp;
 	NSTimer						*frontAppTimer;
+	
+	NSStatusItem				*statusItem;
 }
 
 -(IBAction)showWindow:(id)sender;
+-(IBAction)showInMenubar:(id)sender; 
 -(IBAction)closeWindow:(id)sender;
 
 -(IBAction)addEmail:(id)sender;
+-(IBAction)showContactOnWeb:(id)sender;
 -(IBAction)createCase:(id)sender;
 
 -(IBAction)toggleClient:(id)sender;

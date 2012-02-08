@@ -40,6 +40,9 @@ NSString *SHOW_TASK_RELATEDLIST_WARNING_PREF = @"showTaskRelatedListWarning";
 NSString *SHOW_LION_MAIL_INFO_PREF      = @"showLionMailInfo";
 NSString *HAVE_SHOWN_10_72_INFO_WINDOW  = @"@shownLion1072Info";
 
+NSString *SHOW_BUTTON_BAR				= @"showButtonBar";
+NSString *SHOW_IN_MENUBAR				= @"showInMenuBar";
+
 NSString *AUTO_SHOW_HIDE_BUTTONBAR		= @"autoShowHideButtonBar";
 
 NSString *LEAD							= @"Lead";

@@ -49,6 +49,8 @@
 	[defaults setObject:[NSNumber numberWithBool:YES] forKey:AUTO_SHOW_HIDE_BUTTONBAR];
 	[defaults setObject:[NSNumber numberWithBool:YES] forKey:SHOW_LION_MAIL_INFO_PREF];
 	[defaults setObject:[NSNumber numberWithBool:NO]  forKey:HAVE_SHOWN_10_72_INFO_WINDOW];
+	[defaults setObject:[NSNumber numberWithBool:NO]  forKey:SHOW_BUTTON_BAR];
+	[defaults setObject:[NSNumber numberWithBool:YES]  forKey:SHOW_IN_MENUBAR];
 	
 	[defaults setObject:@"Subject" forKey:@"additionalField_Case"];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
@@ -135,7 +137,13 @@
 }
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	[self showButtonBar:self];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults boolForKey:SHOW_BUTTON_BAR]) {
+		[self showButtonBar:self];
+	}
+	if ([defaults boolForKey:SHOW_IN_MENUBAR]) {
+		[buttonBarController showInMenubar:self];
+	}
 	[self showLionInfo];
 	
 //	[[NSDistributedNotificationCenter

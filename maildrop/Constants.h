@@ -40,6 +40,9 @@ extern NSString *SHOW_TASK_RELATEDLIST_WARNING_PREF;
 extern NSString *SHOW_LION_MAIL_INFO_PREF;
 extern NSString *HAVE_SHOWN_10_72_INFO_WINDOW;
 
+extern NSString *SHOW_BUTTON_BAR;
+extern NSString *SHOW_IN_MENUBAR;
+
 extern NSString *AUTO_SHOW_HIDE_BUTTONBAR;
 
 extern NSString *LEAD;

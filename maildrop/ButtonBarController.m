@@ -30,6 +30,7 @@ NSString *outlookBundleId = @"com.microsoft.Outlook";
 static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 
 @interface ButtonBarController ()
+@property(nonatomic, retain)NSStatusItem *statusItem;
 -(void)setIsFrontMostApp:(BOOL)fm;
 -(void)hideProgressWithAnimation:(BOOL)animate;
 @end
@@ -75,6 +76,7 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 @end
 
 @implementation ButtonBarController
+@synthesize statusItem;
 
 -(void)awakeFromNib {
 	ClientApp *mail = [ClientApp withBundleId:mailBundleId		 imageName:@"mail_icon"		folderName:MAIL_SCRIPTS_FOLDER];
@@ -207,6 +209,40 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 	[window orderOut:sender];
 }
 
+-(IBAction)showInMenubar:(id)sender 
+{
+	self.statusItem = [[NSStatusBar systemStatusBar] 
+				  statusItemWithLength:NSVariableStatusItemLength];
+    [self.statusItem setHighlightMode:YES];
+	[self.statusItem setEnabled:YES];
+
+
+	NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
+	
+	NSString *myPath = [[NSBundle mainBundle] bundlePath];
+	NSImage* icon = [workspace iconForFile:myPath];
+	NSSize size = [icon size];
+	CGFloat height = 18.0;
+	CGFloat scaleFactor = height/size.height;
+	CGFloat maxWidth = size.width * scaleFactor;
+	[icon setSize:NSMakeSize(maxWidth, height)];
+	[self.statusItem setImage:icon];
+	
+	NSNib *nib = [[[NSNib alloc] initWithNibNamed:@"menubar" bundle:[NSBundle mainBundle]] autorelease];
+	NSArray *nibObjects = nil;
+	[nib instantiateNibWithOwner:self topLevelObjects:&nibObjects];
+	NSMenu *menu = nil;
+	
+	for (id nibObject in nibObjects) {
+		if ([nibObject isKindOfClass:[NSMenu class]]) {
+			menu = nibObject;
+			break;
+		}
+	}
+	[self.statusItem setMenu:menu];
+
+}
+
 -(void)showWindow:(id)sender {
 	[self hideProgressWithAnimation:NO];
 	[self checkProcesses];
@@ -253,6 +289,12 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 -(IBAction)addEmail:(id)sender {
 	[self executeAppleScript:ADD_EMAIL_SCRIPT_NAME];
 }
+-(IBAction)showContactOnWeb:(id)sender
+{
+	//need to do some applescript mojo to get the sender of the current email
+
+}
+
 
 -(IBAction)createCase:(id)sender {
 	[self executeAppleScript:ADD_CASE_SCRIPT_NAME];
