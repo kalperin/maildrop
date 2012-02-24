@@ -13,6 +13,10 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		A934AE4714E2D8EF00CD43C3 /* menubar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A934AE4514E2D8EF00CD43C3 /* menubar.xib */; };
 		A934AE4A14E2DAE500CD43C3 /* salesforce32.png in Resources */ = {isa = PBXBuildFile; fileRef = A934AE4914E2DAE500CD43C3 /* salesforce32.png */; };
+		A98D569E14F7E8EA00AA8AA0 /* PTHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D569914F7E8EA00AA8AA0 /* PTHotKey.m */; };
+		A98D569F14F7E8EA00AA8AA0 /* PTHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D569B14F7E8EA00AA8AA0 /* PTHotKeyCenter.m */; };
+		A98D56A014F7E8EA00AA8AA0 /* PTKeyCombo.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D569D14F7E8EA00AA8AA0 /* PTKeyCombo.m */; };
+		A98D56A314F7EBCE00AA8AA0 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98D56A214F7EBCE00AA8AA0 /* Carbon.framework */; };
 		F41532EC0B4227FE00E36D7B /* CreateActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41532EB0B4227FE00E36D7B /* CreateActivityController.m */; };
 		F41B85570B3CFB5200971C0B /* Email.m in Sources */ = {isa = PBXBuildFile; fileRef = F41B85560B3CFB5200971C0B /* Email.m */; };
 		F41B85600B3CFE6400971C0B /* maildrop.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F41B855F0B3CFE6400971C0B /* maildrop.sdef */; };
@@ -111,6 +115,13 @@
 		8D1107320486CEB800E47090 /* Maildrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maildrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A934AE4614E2D8EF00CD43C3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/menubar.xib; sourceTree = "<group>"; };
 		A934AE4914E2DAE500CD43C3 /* salesforce32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = salesforce32.png; sourceTree = "<group>"; };
+		A98D569814F7E8EA00AA8AA0 /* PTHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTHotKey.h; sourceTree = "<group>"; };
+		A98D569914F7E8EA00AA8AA0 /* PTHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTHotKey.m; sourceTree = "<group>"; };
+		A98D569A14F7E8EA00AA8AA0 /* PTHotKeyCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTHotKeyCenter.h; sourceTree = "<group>"; };
+		A98D569B14F7E8EA00AA8AA0 /* PTHotKeyCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTHotKeyCenter.m; sourceTree = "<group>"; };
+		A98D569C14F7E8EA00AA8AA0 /* PTKeyCombo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKeyCombo.h; sourceTree = "<group>"; };
+		A98D569D14F7E8EA00AA8AA0 /* PTKeyCombo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKeyCombo.m; sourceTree = "<group>"; };
+		A98D56A214F7EBCE00AA8AA0 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		F41532EA0B4227FE00E36D7B /* CreateActivityController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CreateActivityController.h; sourceTree = "<group>"; };
 		F41532EB0B4227FE00E36D7B /* CreateActivityController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CreateActivityController.m; sourceTree = "<group>"; };
 		F41B85550B3CFB5200971C0B /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Email.h; sourceTree = "<group>"; };
@@ -237,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98D56A314F7EBCE00AA8AA0 /* Carbon.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				F4DBCB0D0B3DC4F000D94639 /* Security.framework in Frameworks */,
 				F450990D0B51A969007D82E9 /* Sparkle.framework in Frameworks */,
@@ -303,8 +315,10 @@
 		29B97314FDCFA39411CA2CEA /* maildrop */ = {
 			isa = PBXGroup;
 			children = (
+				A98D56A214F7EBCE00AA8AA0 /* Carbon.framework */,
 				F4DBCB040B3DC2AB00D94639 /* common */,
 				F4329C4A0B3DA4AD003AB463 /* sforce */,
+				A98D569714F7E8EA00AA8AA0 /* HotKey */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -359,6 +373,19 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A98D569714F7E8EA00AA8AA0 /* HotKey */ = {
+			isa = PBXGroup;
+			children = (
+				A98D569814F7E8EA00AA8AA0 /* PTHotKey.h */,
+				A98D569914F7E8EA00AA8AA0 /* PTHotKey.m */,
+				A98D569A14F7E8EA00AA8AA0 /* PTHotKeyCenter.h */,
+				A98D569B14F7E8EA00AA8AA0 /* PTHotKeyCenter.m */,
+				A98D569C14F7E8EA00AA8AA0 /* PTKeyCombo.h */,
+				A98D569D14F7E8EA00AA8AA0 /* PTKeyCombo.m */,
+			);
+			path = HotKey;
 			sourceTree = "<group>";
 		};
 		F4329C4A0B3DA4AD003AB463 /* sforce */ = {
@@ -619,6 +646,9 @@
 				F4844D5C1319E7DB00E1F303 /* zkUserInfo.m in Sources */,
 				F4844D5D1319E7DB00E1F303 /* zkXmlDeserializer.m in Sources */,
 				F47E3521145906450017AD47 /* LionInfoWindowController.m in Sources */,
+				A98D569E14F7E8EA00AA8AA0 /* PTHotKey.m in Sources */,
+				A98D569F14F7E8EA00AA8AA0 /* PTHotKeyCenter.m in Sources */,
+				A98D56A014F7E8EA00AA8AA0 /* PTKeyCombo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

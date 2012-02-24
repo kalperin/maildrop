@@ -22,6 +22,8 @@
 #import "ButtonBarController.h"
 #import "zkSforce.h"
 #import "Constants.h"
+#import "PTHotKey.h"
+#import "PTHotKeyCenter.h"
 
 NSString *mailBundleId = @"com.apple.mail";
 NSString *enotourageBundleId = @"com.microsoft.Entourage";
@@ -31,6 +33,7 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 
 @interface ButtonBarController ()
 @property(nonatomic, retain)NSStatusItem *statusItem;
+@property(nonatomic, retain)PTHotKey *menuHotKey;
 -(void)setIsFrontMostApp:(BOOL)fm;
 -(void)hideProgressWithAnimation:(BOOL)animate;
 @end
@@ -77,6 +80,7 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 
 @implementation ButtonBarController
 @synthesize statusItem;
+@synthesize menuHotKey;
 
 -(void)awakeFromNib {
 	ClientApp *mail = [ClientApp withBundleId:mailBundleId		 imageName:@"mail_icon"		folderName:MAIL_SCRIPTS_FOLDER];
@@ -240,6 +244,19 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 		}
 	}
 	[self.statusItem setMenu:menu];
+	
+	
+	//register cmd-opt-ctrl-s key code
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	self.menuHotKey = [[PTHotKey alloc] initWithIdentifier:@"MDHK"
+											 keyCombo:[PTKeyCombo keyComboWithKeyCode:[defaults integerForKey:kHotKeyKey]
+																			modifiers:[defaults integerForKey:kHotKeyModifiersKey]]];
+	
+	[self.menuHotKey setTarget: self];
+	[self.menuHotKey setAction: @selector(hitMenuHotKey:)];
+	
+	[[PTHotKeyCenter sharedCenter] registerHotKey: self.menuHotKey];
+
 
 }
 
@@ -298,6 +315,12 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 
 -(IBAction)createCase:(id)sender {
 	[self executeAppleScript:ADD_CASE_SCRIPT_NAME];
+}
+
+#pragma mark hot key methods
+- (void)hitMenuHotKey:(PTHotKey *)hotKey
+{
+	[self.statusItem popUpStatusItemMenu:[self.statusItem menu]];
 }
 
 @end

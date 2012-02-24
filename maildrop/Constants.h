@@ -48,3 +48,6 @@ extern NSString *AUTO_SHOW_HIDE_BUTTONBAR;
 extern NSString *LEAD;
 extern NSString *CONTACT;
 extern NSString *ACCOUNT;
+
+extern NSString * const kHotKeyModifiersKey;
+extern NSString * const kHotKeyKey;

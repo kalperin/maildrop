@@ -20,6 +20,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PTHotKey.h"
 
 @class ZKSforceClient;
 @class ClientApp;
@@ -39,6 +40,7 @@
 	NSTimer						*frontAppTimer;
 	
 	NSStatusItem				*statusItem;
+	PTHotKey					*menuHotKey;
 }
 
 -(IBAction)showWindow:(id)sender;

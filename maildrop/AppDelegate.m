@@ -51,6 +51,10 @@
 	[defaults setObject:[NSNumber numberWithBool:NO]  forKey:HAVE_SHOWN_10_72_INFO_WINDOW];
 	[defaults setObject:[NSNumber numberWithBool:NO]  forKey:SHOW_BUTTON_BAR];
 	[defaults setObject:[NSNumber numberWithBool:YES]  forKey:SHOW_IN_MENUBAR];
+
+	[defaults setObject:[NSNumber numberWithInteger:1]  forKey:kHotKeyKey];
+	[defaults setObject:[NSNumber numberWithInteger:6400]  forKey:kHotKeyModifiersKey];
+
 	
 	[defaults setObject:@"Subject" forKey:@"additionalField_Case"];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
