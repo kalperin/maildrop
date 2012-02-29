@@ -28,6 +28,7 @@
 #import "ZKDescribeLayout.h"
 #import "ZKRelatedList.h"
 #import "LionInfoWindowController.h"
+#import "ButtonBarController.h"
 
 @implementation AppDelegate
 
@@ -186,7 +187,11 @@
 }
 
 -(IBAction)showButtonBar:(id)sender {
-	[buttonBarController showWindow:sender];
+	if ([buttonBarController isVisible]) {
+		[buttonBarController closeWindow:sender];
+	} else {
+		[buttonBarController showWindow:sender];
+	}
 }
 
 -(void)showHelpPage:(NSString *)page {

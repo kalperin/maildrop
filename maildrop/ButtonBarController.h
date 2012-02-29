@@ -56,6 +56,8 @@
 -(void)showProgressOf:(int)value max:(int)maxValue withText:(NSString *)progressLabel;
 -(void)hideProgress;
 
+-(BOOL)isVisible;
+
 @property (retain) ClientApp *selectedClient;
 @end
 

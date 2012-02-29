@@ -138,6 +138,10 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 	[progress stopAnimation:self];
 }
 
+-(BOOL)isVisible
+{
+	return [window isVisible];
+}
 -(ClientApp *)selectedClient {
 	return selectedClient;
 }
