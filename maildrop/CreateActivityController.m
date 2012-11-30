@@ -30,6 +30,7 @@
 #import "WhoWhat.h"
 #import "zkSObject.h"
 #import "Constants.h"
+#import "AddContactWindow.h"
 
 @interface ZKSObject (AccountNameHelper)
 -(NSString *)accountName;
@@ -37,6 +38,8 @@
 
 @interface CreateActivityController ()
 - (void)saveCheckedWhats;
+-(NSString *)createAccountAndReturnIDWithName:(NSString *)accountName;
+
 @property (retain) ZKSforceClient *sforce;
 @end
 
@@ -138,9 +141,13 @@
 	[self willChangeValueForKey:@"selectedWhoWhats"];
 	[self selectedWhoWhats];
 	[self didChangeValueForKey:@"selectedWhoWhats"];
+	NSSet *filteredExtensions = [NSSet setWithObjects:@"gif", @"png", @"jpg", @"jpeg", nil];
 	for (Attachment *a in [email attachments]) {
 		if ([a parentWhoWhat] == nil)
 			[a setParentWhoWhat:selectedWho != nil ? selectedWho : selectedWhat];
+		//don't include images in attachments by default
+		[a setShouldUpload:![filteredExtensions containsObject:[[a name] pathExtension]]];
+		
 	}
 }
 
@@ -182,7 +189,7 @@
 		
 		ZKSaveResult *opportunityContactRoleSaveResult = [[sforce create:[NSArray arrayWithObject:[opportunityContactRole sobject]]] objectAtIndex:0];
 		if (![opportunityContactRoleSaveResult success]) {
-			NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity contact role" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[sr message]];
+			NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity contact role" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@",[sr message]];
 			[a runModal];
 			
 		}
@@ -191,14 +198,30 @@
 //		[pendingTaskWhoWhat setTaskId:[sr id]];
 //		[NSApp stopModal];
 	} else { 
-		NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[sr message]];
+		NSAlert * a = [NSAlert alertWithMessageText:@"Unable to create opportunity" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@",[sr message]];
 		[a runModal];
 	}
+}
 
-
-
+-(NSString *)createAccountAndReturnIDWithName:(NSString *)accountName
+{
+    NSString *newAccountID = nil;
+    SObjectPermsWrapper *account = [SObjectPermsWrapper withDescribe:[sforce describeSObject:@"Account"] forUpdate:NO];
+//	[account setFieldValue:accountID field:@"AccountID"];
+	[account setFieldValue:accountName field:@"Name"];
+    ZKSaveResult *sr = [[sforce create:[NSArray arrayWithObject:[account sobject]]] objectAtIndex:0];
+	BOOL success = [sr success];
+    if (!success) {
+        NSString *message = [NSString stringWithFormat:@"Unable to create Account %@", accountName];
+		NSAlert * a = [NSAlert alertWithMessageText:message defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@",[sr message]];
+		[a runModal];
+    } else {
+        newAccountID = [sr id];
+    }
+    return newAccountID;
 
 }
+
 - (IBAction)create:(id)sender {
 	SObjectPermsWrapper *task = [SObjectPermsWrapper withDescribe:[sforce describeSObject:@"Task"] forUpdate:NO];
 	[task setFieldValue:[NSString stringWithFormat:@"Email: %@", [email subject]] field:@"Subject"];
@@ -417,6 +440,17 @@
 
 - (IBAction)showCreateContact:(id)sender {
 	[self setCurrentPropertiesFromEmail];
+    
+    //load account names
+    //keith says: this is kind of goofy, but i don't have a strong enough sense of how this app works to do a better job of querying and providing this data
+    ZKQueryResult *qr = [self.sforce query:[NSString stringWithFormat:@"select id, name from account"]];
+
+    NSMutableDictionary *accountNamesByAccountIDs = [NSMutableDictionary dictionaryWithCapacity:[[qr records] count]];
+    for(id accountRecord in [qr records]) {
+        [accountNamesByAccountIDs setObject:[accountRecord valueForKey:@"Name"] forKey:[accountRecord valueForKey:@"Id"]];
+    }
+    [createContactWindow setAccountNamesByAccountIDs:accountNamesByAccountIDs];
+        
 	[NSApp beginSheet:createContactWindow modalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
@@ -449,7 +483,21 @@
 	if (isLead) {
 		[n setFieldValue:[self makeNotNull:[self contactCompany]]   field:@"Company"];
 		[n setFieldValue:[self makeNotNull:[self contactLeadStatus]] field:@"Status"];
-	}
+	} else {
+        if (createContactWindow.selectedAccountID != nil) {
+            //if there's an account id, then set the account.
+            [n setFieldValue:createContactWindow.selectedAccountID field:@"AccountId"];
+
+        } else {
+            //if there's no account id, then create an account and set it.
+            NSString *newAccountName = createContactWindow.selectedAccountName;
+            if ([[newAccountName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0) {
+                NSString *newAccountID = [self createAccountAndReturnIDWithName:newAccountName];
+                [n setFieldValue:newAccountID field:@"AccountId"];
+            }
+        }
+        
+    }
 	ZKSaveResult *sr = [[sforce create:[NSArray arrayWithObject:n]] objectAtIndex:0];
 	if ([sr success]) {
 		[NSApp endSheet:sheetWindow];

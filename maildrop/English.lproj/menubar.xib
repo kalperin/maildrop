@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C73</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2844</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<string>NSCustomObject</string>
 			<string>NSMenu</string>
 			<string>NSMenuItem</string>
-			<string>NSCustomObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -48,37 +48,14 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">mail32</string>
 						</object>
-						<object class="NSCustomResource" key="NSOnImage" id="632537074">
+						<object class="NSCustomResource" key="NSOnImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuCheckmark</string>
 						</object>
-						<object class="NSCustomResource" key="NSMixedImage" id="86367177">
+						<object class="NSCustomResource" key="NSMixedImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
-					</object>
-					<object class="NSMenuItem" id="679875301">
-						<reference key="NSMenu" ref="857223160"/>
-						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Show Sender</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSImage" id="997263091">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">salesforce32</string>
-						</object>
-						<reference key="NSOnImage" ref="632537074"/>
-						<reference key="NSMixedImage" ref="86367177"/>
-					</object>
-					<object class="NSMenuItem" id="747839533">
-						<reference key="NSMenu" ref="857223160"/>
-						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Show Caller</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSImage" ref="997263091"/>
-						<reference key="NSOnImage" ref="632537074"/>
-						<reference key="NSMixedImage" ref="86367177"/>
 					</object>
 				</object>
 			</object>
@@ -129,25 +106,13 @@
 						<reference key="object" ref="857223160"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="679875301"/>
 							<reference ref="983335103"/>
-							<reference ref="747839533"/>
 						</object>
 						<reference key="parent" ref="1002"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">2</int>
-						<reference key="object" ref="679875301"/>
-						<reference key="parent" ref="857223160"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
 						<reference key="object" ref="983335103"/>
-						<reference key="parent" ref="857223160"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="747839533"/>
 						<reference key="parent" ref="857223160"/>
 					</object>
 				</object>
@@ -160,14 +125,10 @@
 					<string>-2.IBPluginDependency</string>
 					<string>-3.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
-					<string>2.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
-					<string>7.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -203,11 +164,13 @@
 							<string>closeWindow:</string>
 							<string>createCase:</string>
 							<string>showContactOnWeb:</string>
+							<string>showInMenubar:</string>
 							<string>showWindow:</string>
 							<string>toggleClient:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -224,10 +187,11 @@
 							<string>closeWindow:</string>
 							<string>createCase:</string>
 							<string>showContactOnWeb:</string>
+							<string>showInMenubar:</string>
 							<string>showWindow:</string>
 							<string>toggleClient:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">addEmail:</string>
@@ -243,6 +207,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showContactOnWeb:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showInMenubar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -264,7 +232,7 @@
 							<string>toggleButton</string>
 							<string>window</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSProgressIndicator</string>
 							<string>NSTextField</string>
@@ -281,7 +249,7 @@
 							<string>toggleButton</string>
 							<string>window</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">progress</string>
@@ -323,13 +291,11 @@
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
 				<string>mail32</string>
-				<string>salesforce32</string>
 			</object>
-			<object class="NSMutableArray" key="dict.values">
+			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{9, 8}</string>
-				<string>{7, 2}</string>
-				<string>{32, 32}</string>
+				<string>{11, 11}</string>
+				<string>{10, 3}</string>
 				<string>{32, 32}</string>
 			</object>
 		</object>

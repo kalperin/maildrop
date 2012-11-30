@@ -17,6 +17,7 @@
 		A98D569F14F7E8EA00AA8AA0 /* PTHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D569B14F7E8EA00AA8AA0 /* PTHotKeyCenter.m */; };
 		A98D56A014F7E8EA00AA8AA0 /* PTKeyCombo.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D569D14F7E8EA00AA8AA0 /* PTKeyCombo.m */; };
 		A98D56A314F7EBCE00AA8AA0 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98D56A214F7EBCE00AA8AA0 /* Carbon.framework */; };
+		A9954A2F164AD7E200EAF2A3 /* AddContactWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A9954A2E164AD7E200EAF2A3 /* AddContactWindow.m */; };
 		F41532EC0B4227FE00E36D7B /* CreateActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41532EB0B4227FE00E36D7B /* CreateActivityController.m */; };
 		F41B85570B3CFB5200971C0B /* Email.m in Sources */ = {isa = PBXBuildFile; fileRef = F41B85560B3CFB5200971C0B /* Email.m */; };
 		F41B85600B3CFE6400971C0B /* maildrop.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F41B855F0B3CFE6400971C0B /* maildrop.sdef */; };
@@ -122,6 +123,8 @@
 		A98D569C14F7E8EA00AA8AA0 /* PTKeyCombo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKeyCombo.h; sourceTree = "<group>"; };
 		A98D569D14F7E8EA00AA8AA0 /* PTKeyCombo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKeyCombo.m; sourceTree = "<group>"; };
 		A98D56A214F7EBCE00AA8AA0 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		A9954A2D164AD7E200EAF2A3 /* AddContactWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactWindow.h; sourceTree = "<group>"; };
+		A9954A2E164AD7E200EAF2A3 /* AddContactWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactWindow.m; sourceTree = "<group>"; };
 		F41532EA0B4227FE00E36D7B /* CreateActivityController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CreateActivityController.h; sourceTree = "<group>"; };
 		F41532EB0B4227FE00E36D7B /* CreateActivityController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CreateActivityController.m; sourceTree = "<group>"; };
 		F41B85550B3CFB5200971C0B /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Email.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				F46C83A90EC6777200944C77 /* Constants.m */,
 				F47E351F145906450017AD47 /* LionInfoWindowController.h */,
 				F47E3520145906450017AD47 /* LionInfoWindowController.m */,
+				A9954A2D164AD7E200EAF2A3 /* AddContactWindow.h */,
+				A9954A2E164AD7E200EAF2A3 /* AddContactWindow.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 				A98D569E14F7E8EA00AA8AA0 /* PTHotKey.m in Sources */,
 				A98D569F14F7E8EA00AA8AA0 /* PTHotKeyCenter.m in Sources */,
 				A98D56A014F7E8EA00AA8AA0 /* PTKeyCombo.m in Sources */,
+				A9954A2F164AD7E200EAF2A3 /* AddContactWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

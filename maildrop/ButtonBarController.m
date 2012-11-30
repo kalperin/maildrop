@@ -308,6 +308,7 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 }
 
 -(IBAction)addEmail:(id)sender {
+    
 	[self executeAppleScript:ADD_EMAIL_SCRIPT_NAME];
 }
 -(IBAction)showContactOnWeb:(id)sender

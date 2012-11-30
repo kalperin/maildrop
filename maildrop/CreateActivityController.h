@@ -27,13 +27,14 @@
 @class ZKSObject;
 @class SObjectWhoWhat;
 @class PendingTaskWhoWhat;
+@class AddContactWindow;
 
 @interface CreateActivityController : NSObject
 {
 	IBOutlet NSArrayController	*whoSearchController;
 	IBOutlet NSTableView		*whatSearchResults;
 	IBOutlet NSWindow			*window;
-	IBOutlet NSWindow			*createContactWindow;
+	IBOutlet AddContactWindow	*createContactWindow;
 	IBOutlet NSWindow			*createLeadWindow;
 	IBOutlet NSWindow			*whatSearchConfigWindow;
 	
