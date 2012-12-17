@@ -194,6 +194,8 @@
 			
 		}
 		
+		//show the new opportunity
+		[self searchWhat:sender];
 //		taskId = [[sr id] copy];
 //		[pendingTaskWhoWhat setTaskId:[sr id]];
 //		[NSApp stopModal];
