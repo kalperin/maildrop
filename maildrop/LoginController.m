@@ -63,6 +63,9 @@
 }
 
 - (IBAction)openSalesforceInBrowser:(id)sender {
+	if (sforce == nil) {
+		[self showLoginDialog:sender];
+	}
 	ZKDescribeSObject *d = [sforce describeSObject:@"Task"];
 	NSURL *url = [NSURL URLWithString:[d urlNew]];
 	NSURL *baseUiUrl = [NSURL URLWithString:@"/" relativeToURL:url];		

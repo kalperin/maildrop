@@ -264,6 +264,8 @@ static const CGFloat WINDOW_HEIGHT_PROGRESS = 35.0f;
 
 }
 
+
+
 -(void)showWindow:(id)sender {
 	[self hideProgressWithAnimation:NO];
 	[self checkProcesses];

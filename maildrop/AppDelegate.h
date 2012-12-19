@@ -64,6 +64,7 @@
 - (IBAction)showButtonBarHelp:(id)sender;
 - (IBAction)showHelp:(id)sender;
 - (IBAction)showTaskRelatedListHelp:(id)sender;
+- (IBAction)openSalesforceInBrowser:(id)sender;
 
 - (void)shouldCheckForAttachmentsRelatedListOnTask;
 

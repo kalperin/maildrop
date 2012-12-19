@@ -201,6 +201,13 @@
 	[[NSWorkspace sharedWorkspace] openURL:baseUrl];
 }
 
+
+- (IBAction)openSalesforceInBrowser:(id)sender
+{
+	[loginController openSalesforceInBrowser:sender];
+}
+
+
 - (void)checkForAttachmentsRelatedList {
 	ZKDescribeLayoutResult *layoutRes = [[self sforce] describeLayout:@"Task" recordTypeIds:nil];
 	for (ZKDescribeLayout *layout in [layoutRes layouts]) {
